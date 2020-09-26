@@ -1,0 +1,4 @@
+[core]
+    remote = origin
+['remote "origin"']
+    url = ../dvc-remote
