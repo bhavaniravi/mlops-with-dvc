@@ -24,3 +24,6 @@ stages:
     metrics:
     - assets/eval/scores.json:
         cache: false
+    params:
+    - model.random
+    - model.split

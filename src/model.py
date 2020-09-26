@@ -8,6 +8,9 @@ from sklearn.model_selection import train_test_split
 from sklearn.metrics import confusion_matrix
 from sklearn.metrics import accuracy_score
 import os
+import yaml
+
+params = yaml.safe_load(open('params.yaml'))['model']
 
 def train(model, X_train, y_train):
     fitted_model = model.fit(X_train,y_train)
@@ -40,7 +43,7 @@ def run(model):
         
     vectorizer_analyzer = pickle.load(open(f"{Config.FEATURES_PATH}/vectorizer.pickle", "rb")) 
     X_features = featurize.featurize("train", vectorizer_analyzer)
-    X_train, X_test, y_train, y_test = train_test_split(X_features, train_df["label"], test_size = 0.3, random_state = 20)
+    X_train, X_test, y_train, y_test = train_test_split(X_features, train_df["label"], test_size = params["split"], random_state = params["random"])
     # print ("Train, test :: ", X_train.shape, X_test.shape)
     del X_features
     
