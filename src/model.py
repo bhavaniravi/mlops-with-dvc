@@ -58,7 +58,8 @@ if not os.path.isdir(Config.MODELS_PATH):
 if not os.path.isdir(Config.EVAL_PATH):
     os.mkdir(Config.EVAL_PATH)
 
-
-model = MultinomialNB()
+from sklearn.linear_model import SGDClassifier
+model = SGDClassifier()
+# model = MultinomialNB()
 run(model)
 pickle.dump(model, open(f"{Config.MODELS_PATH}/model.pickle", "wb"))

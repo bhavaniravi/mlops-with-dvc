@@ -19,20 +19,20 @@ featurize:
     md5: 57a33ed04167eb98746e1bc0e981255f
   outs:
   - path: assets/featurized/
-    md5: 394ac9da5da6c71e22891aae6ab5dedf.dir
+    md5: aee30f5831f64be530e447c4017590eb.dir
 train_test_eval:
   cmd: python src/model.py
   deps:
   - path: assets/featurized
-    md5: 6f2fe1f3b72389ddd735987b1799c8b2.dir
+    md5: b2334587a0a04ea3413f735df60b99a8.dir
   - path: src/model.py
-    md5: b7ad5d58854dc88ea0fe18789121f331
+    md5: 92b2e6ccfa6db632879acfecc07d172d
   params:
     params.yaml:
       model.random: 20
       model.split: 0.25
   outs:
   - path: assets/eval/scores.json
-    md5: e4f77b89de5181c349b2775963eca550
+    md5: dfaaa4a0bbfdc1aee394b074b62ad0aa
   - path: assets/models
-    md5: 7ffddf812c0461cf499d3d0a62ce96a0.dir
+    md5: 5df649a68da2f02281a14e4a52dd7d87.dir
