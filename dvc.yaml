@@ -14,3 +14,13 @@ stages:
     - src/preprocess.py
     outs:
     - assets/featurized/
+  train_test_eval:
+    cmd: python src/model.py
+    deps:
+    - assets/featurized
+    - src/model.py
+    outs:
+    - assets/models
+    metrics:
+    - assets/eval/scores.json:
+        cache: false

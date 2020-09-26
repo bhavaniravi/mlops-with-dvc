@@ -44,6 +44,6 @@ def preprocess(force=False):
         hashtags_train.to_csv(f"{Config.PREPROCESS_PATH}/hastags_train.csv")
         hashtags_test.to_csv(f"{Config.PREPROCESS_PATH}/hashtags_test.csv")
 
-
-preprocess(force=False)
+if __name__ == '__main__':
+    preprocess(force=False)
 
