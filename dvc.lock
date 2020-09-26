@@ -24,11 +24,11 @@ train_test_eval:
   cmd: python src/model.py
   deps:
   - path: assets/featurized
-    md5: 6d2fdfb4ea92aece12ac0bdc8de933db.dir
+    md5: 1d79346a3050a99de72c7daadff29d30.dir
   - path: src/model.py
-    md5: 3dc0a341ccd22b4feed1716da1a1785e
+    md5: effc30861e24e9140743a2b8b75a27b5
   outs:
   - path: assets/eval/scores.json
-    md5: 5473eeb1dbb804d9e5dadb2d7f43ff80
+    md5: decfe9ff6568786e4f05117886fe5e98
   - path: assets/models
-    md5: bbeb3fa6ff582c33b1f0cbaead2c4469.dir
+    md5: 21d4d9c0a849d33203d4eb6abfced9bd.dir

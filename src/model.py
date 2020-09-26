@@ -40,7 +40,7 @@ def run(model):
         
     vectorizer_analyzer = pickle.load(open(f"{Config.FEATURES_PATH}/vectorizer.pickle", "rb")) 
     X_features = featurize.featurize("train", vectorizer_analyzer)
-    X_train, X_test, y_train, y_test = train_test_split(X_features, train_df["label"], test_size = 0.2, random_state = 1)
+    X_train, X_test, y_train, y_test = train_test_split(X_features, train_df["label"], test_size = 0.3, random_state = 20)
     # print ("Train, test :: ", X_train.shape, X_test.shape)
     del X_features
     
