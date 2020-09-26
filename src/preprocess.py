@@ -1,10 +1,9 @@
 import pandas as pd
 from config import Config
-from src import utils
+import utils
 
 
 def preprocess(force=False):
-    
     try:
         if force:
             raise FileNotFoundError
@@ -36,7 +35,8 @@ def preprocess(force=False):
         train_df['tweet'] = train_df['tweet'].apply(utils.remove_stop_words)
         test_df['tweet'] = test_df['tweet'].apply(utils.remove_stop_words)
 
-
+        import os
+        os.mkdir(Config.PREPROCESS_PATH)
 
         train_df.to_csv(Config.PREPROCESSED_TRAIN)
         test_df.to_csv(Config.PREPROCESSED_TEST)

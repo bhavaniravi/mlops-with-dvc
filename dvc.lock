@@ -1,0 +1,10 @@
+preprocess:
+  cmd: python src/preprocess.py
+  deps:
+  - path: assets/original_data/train.csv
+    md5: e4e4f90c48d6accade388090f0aec20f
+  - path: src/preprocess.py
+    md5: c4bb66bfb751d15f68d74159d5b67922
+  outs:
+  - path: assets/preprocessed/
+    md5: c15ac4eee953343f5e93c89469a8aee1.dir

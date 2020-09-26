@@ -1,0 +1,8 @@
+stages:
+  preprocess:
+    cmd: python src/preprocess.py
+    deps:
+    - assets/original_data/train.csv
+    - src/preprocess.py
+    outs:
+    - assets/preprocessed/
