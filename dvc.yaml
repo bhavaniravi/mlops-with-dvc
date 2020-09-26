@@ -6,3 +6,11 @@ stages:
     - src/preprocess.py
     outs:
     - assets/preprocessed/
+  featurize:
+    cmd: python src/featurize.py
+    deps:
+    - assets/preprocessed/test.csv
+    - assets/preprocessed/train.csv
+    - src/preprocess.py
+    outs:
+    - assets/featurized/

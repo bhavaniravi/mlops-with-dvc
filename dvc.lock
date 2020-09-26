@@ -8,3 +8,15 @@ preprocess:
   outs:
   - path: assets/preprocessed/
     md5: c15ac4eee953343f5e93c89469a8aee1.dir
+featurize:
+  cmd: python src/featurize.py
+  deps:
+  - path: assets/preprocessed/test.csv
+    md5: e927269b17491a1fe514ad3ef648da1a
+  - path: assets/preprocessed/train.csv
+    md5: cd89a6457d79a41c47231e7b9f7451e5
+  - path: src/preprocess.py
+    md5: c4bb66bfb751d15f68d74159d5b67922
+  outs:
+  - path: assets/featurized/
+    md5: 5c7bb430564bf19d79aee7fb3b233d4e.dir

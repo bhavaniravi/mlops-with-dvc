@@ -3,12 +3,11 @@ from config import Config
 from src import utils
 from sklearn.feature_extraction.text import CountVectorizer
 from numpy import savetxt
-import pickle
+import pickle, os
 
 def featurize(dataset, vectorizer_analyzer):
     fit_and_transform = dataset == "train"
     preped_df = pd.read_csv(f"{Config.PREPROCESS_PATH}/{dataset}.csv")
-    hashtags_train = pd.read_csv(f"{Config.PREPROCESS_PATH}/hashtags_{dataset}.csv")
     preped_df["tweet"] = preped_df["tweet"].fillna("")
     # print (preped_df["tweet"])
     if fit_and_transform:
@@ -19,6 +18,8 @@ def featurize(dataset, vectorizer_analyzer):
 
 
 def create_featurizer(dataset, force=False):
+    if not os.path.isdir(Config.FEATURES_PATH):  
+        os.mkdir(Config.FEATURES_PATH)
     try:
         if force:
             raise FileNotFoundError("Forcing creation")
