@@ -2,3 +2,5 @@
     remote = origin
 ['remote "origin"']
     url = ../dvc-remote
+['remote "gdrive"']
+    url = gdrive://1tsTpwfWTSMWjRDrGqkCC9aDHXA_NY89O
