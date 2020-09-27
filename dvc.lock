@@ -24,15 +24,15 @@ train_test_eval:
   cmd: python src/model.py
   deps:
   - path: assets/featurized
-    md5: d78fb2cc5129970db0b42aa46f4613ca.dir
+    md5: ed9fc77e1ca7637a19bd65dabd75fa6e.dir
   - path: src/model.py
-    md5: 92b2e6ccfa6db632879acfecc07d172d
+    md5: ee5bb13365165bbd50a264fa63635f48
   params:
     params.yaml:
       model.random: 20
       model.split: 0.25
   outs:
   - path: assets/eval/scores.json
-    md5: 06909690ab13b2baa97a873c9234ffbf
+    md5: c0c0c1f100372b70ce4dd74d3dcca8d5
   - path: assets/models
-    md5: 834a58c31a9e01539b72f1d05e0439ec.dir
+    md5: 7bf02adb85f6f25aab9a0bee5561dec7.dir

@@ -5,6 +5,10 @@ from sklearn.feature_extraction.text import CountVectorizer
 from numpy import savetxt
 import pickle, os
 
+def featurize_df(df):
+    vectorizer_analyzer = pickle.load(open(f"{Config.FEATURES_PATH}/vectorizer.pickle", "rb"))  
+    return vectorizer_analyzer.transform(df['tweet'])
+
 def featurize(dataset, vectorizer_analyzer):
     fit_and_transform = dataset == "train"
     preped_df = pd.read_csv(f"{Config.PREPROCESS_PATH}/{dataset}.csv")

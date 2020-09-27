@@ -25,16 +25,21 @@ def test(model, X_test, y_test):
     print ("Accuracy ::", score)
     print ("CM :: \n", cm)
 
+def infer_df(model, df):
+    
+    result_df = pd.DataFrame()
+    result_df["infer"] = model.predict(df)
+    return result_df
+
 def infer(model):
-    infer_df = pd.read_csv(Config.TEST_DATASET)
     vectorizer_analyzer = pickle.load(open(f"{Config.FEATURES_PATH}/vectorizer.pickle", "rb")) 
     X_infer = featurize.featurize("test", vectorizer_analyzer)
-
-    result_df = pd.DataFrame()
-    result_df["id"] = infer_df["id"]
-    result_df["infer"] = model.predict(X_infer)
-
+    result_df = infer_df(model, X_infer)
+    
+    inference_df = pd.read_csv(f"{Config.ORIGINAL_DATASET_PATH}/test.csv")
+    result_df["id"] = inference_df["id"]
     result_df.to_csv(f"{Config.MODELS_PATH}/result.csv", index=False)
+
 
 
 def run(model):  
@@ -58,8 +63,9 @@ if not os.path.isdir(Config.MODELS_PATH):
 if not os.path.isdir(Config.EVAL_PATH):
     os.mkdir(Config.EVAL_PATH)
 
-from sklearn.linear_model import SGDClassifier
-model = SGDClassifier()
-# model = MultinomialNB()
-run(model)
-pickle.dump(model, open(f"{Config.MODELS_PATH}/model.pickle", "wb"))
+if __name__ == '__main__':
+    from sklearn.linear_model import SGDClassifier
+    model = SGDClassifier()
+    # model = MultinomialNB()
+    run(model)
+    pickle.dump(model, open(f"{Config.MODELS_PATH}/model.pickle", "wb"))
