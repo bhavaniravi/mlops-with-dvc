@@ -15,11 +15,37 @@ WIP
 
 ## Setup and Run project
 
-The project still doesn't have a remote dvc so it's a WIP
+1. Clone the repo
+
+```
+git clone <repo_url>
+cd <repo-name>
+```
+
+2. Pull the data from gdrive
+
+```
+dvc pull -r gdrive
+```
+
+> It will ask for authorization, please enter the auth key from the URL 
+
+3. Run the application
+
+```
+python app/app.py
+```
+
+4. Update model/any ML step and run
+
+```
+dvc repro
+dvc push -r gdrive
+```
 
 ## DVC Notes
 
-> To be updated
+> How is the pipeline created?
 
 ```
 dvc run -n preprocess -d src/preprocess.py -d assets/original_data/train.csv  -o assets/preprocessed/  python src/preprocess.python
