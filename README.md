@@ -13,6 +13,11 @@ The project is designed to for a talk at #devfestindia-2020
 
 WIP
 
+## Pre-requisite
+
+1. Python 3.7
+2. Gdrive access to the model files
+
 ## Setup and Run project
 
 1. Clone the repo
@@ -22,7 +27,13 @@ git clone <repo_url>
 cd <repo-name>
 ```
 
-2. Pull the data from gdrive
+2. Install the requirements
+
+```
+pip install -r requirements.txt
+```
+
+3. Pull the data from gdrive
 
 ```
 dvc pull -r gdrive
@@ -30,7 +41,23 @@ dvc pull -r gdrive
 
 > It will ask for authorization, please enter the auth key from the URL 
 
-3. Run the application
+4. Setup nltk
+
+Open python3 terminal using `python3` command
+
+```
+import nltk
+nltk.download('stopwords')
+nltk.download('punkt')
+
+```
+
+If you get an SSL error, follow this URL https://stackoverflow.com/a/55842653/6340775
+
+
+5. Set PYTHONPATH
+
+4. Run the application
 
 ```
 python app/app.py
