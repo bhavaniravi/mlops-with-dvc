@@ -1,83 +1,103 @@
-# MLOps - Devfest
+# Google Compute Engine - GitHub Actions
 
-The project is designed to for a talk at #devfestindia-2020
+An example workflow that uses [GitHub Actions][actions] to deploy a container to
+an existing [Google Compute Engine][gce] (GCE) instance.
 
-## Topics to be convered
+This code is intended to be an _example_. You will likely need to change or
+update values to match your setup.
 
-1. Data versioning
-2. Building training pipelines
-3. Versioning models
-4. Deploying using docker and kubernetes
+## Workflow description
 
-## Slides
+For pushes to the `master` branch, this workflow will:
 
-WIP
+1.  Download and configure the Google [Cloud SDK][sdk] with the provided
+    credentials.
 
-## Pre-requisite
+1.  Build, tag, and push a container image to Google Container Registry.
 
-1. Python 3.7
-2. Gdrive access to the model files
+1.  Deploy the container image to a Google Compute Engine instance. Note that a
+    GCE deployment requires an existing [container-optimized VM][create-vm].
 
-## Setup and Run project
+## Setup
 
-1. Clone the repo
+1.  Create a new Google Cloud Project (or select an existing project) and
+    [enable the Container Registry and Compute APIs](https://console.cloud.google.com/flows/enableapi?apiid=containerregistry.googleapis.com,compute.googleapis.com).
 
-```
-git clone <repo_url>
-cd <repo-name>
-```
+1.  [Create a container-optimized GCE VM][create-vm] or use an existing
+    container-optimized VM. Note the VM name and zone.
 
-2. Install the requirements
+1.  Create or reuse a GitHub repository for the example workflow:
 
-```
-pip install -r requirements.txt
-```
+    1.  [Create a repository](https://help.github.com/en/github/creating-cloning-and-archiving-repositories/creating-a-new-repository).
 
-3. Pull the data from gdrive
+    1.  Move into the repository directory:
 
-```
-dvc pull -r gdrive
-```
+        ```
+        $ cd <repo>
+        ```
 
-> It will ask for authorization, please enter the auth key from the URL 
+    1.  Copy the example into the repository:
 
-4. Setup nltk
+        ```
+        $ cp -r <path_to>/github-actions/example-workflows/gce/ .
+        ```
 
-Open python3 terminal using `python3` command
+1.  [Create a Google Cloud service account][create-sa] if one does not already
+    exist.
 
-```
-import nltk
-nltk.download('stopwords')
-nltk.download('punkt')
+1.  Add the the following [Cloud IAM roles][roles] to your service account:
 
-```
+    - `Compute Instance Admin` - allows administering GCE VMs
 
-If you get an SSL error, follow this URL https://stackoverflow.com/a/55842653/6340775
+    - `Storage Admin` - allows pushing to Container Registry
+
+    - `Service Account User` - run operations as the compute storage account
+
+    Note: These permissions are overly broad to favor a quick start. They do not
+    represent best practices around the Principle of Least Privledge. To
+    properly restrict access, you should create a custom IAM role with the most
+    restrictive permissions.
+
+1.  [Create a JSON service account key][create-key] for the service account.
+
+1.  Add the following secrets to your repository's secrets:
+
+    - `GCE_PROJECT`: Google Cloud project ID
+
+    - `GCE_SA_KEY`: the content of the service account JSON file
+
+1.  Update `.github/workflows/gce.yml` to match the values corresponding to your
+    VM:
+
+    - `GCE_INSTANCE` - the instance name of the VM
+
+    - `GCE_INSTANCE_ZONE` - the zone your VM resides
 
 
-5. Set PYTHONPATH
+## Run the workflow
 
-4. Run the application
+1.  Add and commit your changes:
 
-```
-python app/app.py
-```
+    ```text
+    $ git add .
+    $ git commit -m "Set up GitHub workflow"
+    ```
 
-4. Update model/any ML step and run
+1.  Push to the `master` branch:
 
-```
-dvc repro
-dvc push -r gdrive
-```
+    ```text
+    $ git push -u origin master
+    ```
 
-## DVC Notes
+1.  View the GitHub Actions Workflow by selecting the `Actions` tab at the top
+    of your repository on GitHub. Then click on the `Build and Deploy to Google
+    Compute Engine` element to see the details.
 
-> How is the pipeline created?
-
-```
-dvc run -n preprocess -d src/preprocess.py -d assets/original_data/train.csv  -o assets/preprocessed/  python src/preprocess.python
-dvc run -n featurize -d src/preprocess.py -d assets/preprocessed/train.csv -d assets/preprocessed/train.csv   -o assets/featurized/  python src/featurize.py 
-dvc run -fn train_test_eval  -d src/model.py -d assets/featurized -p model.random,model.split  -o assets/models  -M assets/eval/scores.json  python src/model.py 
-dvc run -fn train_test_eval  -d src/model.py -d assets/featurized -p model.random,model.split  -o assets/models  -M assets/eval/scores.json  python src/model.py 
-```
-
+[actions]: https://help.github.com/en/categories/
+[gce]: https://cloud.google.com/compute
+[create-sa]: https://cloud.google.com/iam/docs/creating-managing-service-accounts
+[create-key]: https://cloud.google.com/iam/docs/creating-managing-service-account-keys
+[create-vm]: https://cloud.google.com/container-optimized-os/docs/how-to/create-configure-instance
+[sdk]: https://cloud.google.com/sdk
+[secrets]: https://help.github.com/en/actions/automating-your-workflow-with-github-actions/creating-and-using-encrypted-secrets
+[roles]: https://cloud.google.com/iam/docs/granting-roles-to-service-accounts#granting_access_to_a_service_account_for_a_resource
