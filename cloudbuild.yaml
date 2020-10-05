@@ -1,12 +1,12 @@
 steps:
 # This step creates ip address
-- name: 'gcr.io/cloud-builders/gcloud'
-  id: Reserve IP
-  entrypoint: 'bash'
-  args:
-    - '-c'
-    - |
-      gcloud compute addresses create mlops --region us-central1 || echo 'Already available'
+# - name: 'gcr.io/cloud-builders/gcloud'
+#   id: Reserve IP
+#   entrypoint: 'bash'
+#   args:
+#     - '-c'
+#     - |
+#       gcloud compute addresses create mlops --region us-central1 || echo 'Already available'
 
 # This step generates the new manifest
 - name: 'gcr.io/cloud-builders/gcloud'

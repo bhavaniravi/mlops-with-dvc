@@ -76,6 +76,8 @@ For pushes to the `master` branch, this workflow will:
 
 ## Run the workflow
 
+> Not applicable
+
 1.  Add and commit your changes:
 
     ```text
