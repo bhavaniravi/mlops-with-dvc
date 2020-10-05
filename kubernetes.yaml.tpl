@@ -28,7 +28,7 @@ spec:
 kind: Service
 apiVersion: v1
 metadata:
-  namespace: edc-api
+  namespace: "mlops"
   name: APP_NAME
 spec:
   selector:
