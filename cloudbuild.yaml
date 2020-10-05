@@ -56,4 +56,4 @@ steps:
   - 'kubernetes.yaml'
   env:
   - 'CLOUDSDK_COMPUTE_ZONE=us-central1-a'
-  - 'CLOUDSDK_CONTAINER_CLUSTER=main'
+  - 'CLOUDSDK_CONTAINER_CLUSTER=mlops-cluster'
