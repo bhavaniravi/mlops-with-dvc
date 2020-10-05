@@ -8,4 +8,3 @@ assets/original_data
 assets/preprocessed
 assets/featurized
 assets/models
-!.git
