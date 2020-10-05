@@ -20,6 +20,8 @@ RUN pip install -r requirements.txt
 # add source code
 COPY . /project
 
+WORKDIR /project/
+
 # run server
 #CMD python manage.py runserver
 CMD bash ./deploy.sh
