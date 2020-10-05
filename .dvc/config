@@ -4,3 +4,5 @@
     url = ../dvc-remote
 ['remote "gdrive"']
     url = gdrive://1tsTpwfWTSMWjRDrGqkCC9aDHXA_NY89O
+['remote "gcs"']
+    url = gs://mlops-dvc-storage
