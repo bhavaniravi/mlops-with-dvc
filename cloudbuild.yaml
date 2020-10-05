@@ -1,0 +1,59 @@
+steps:
+# This step creates ip address
+- name: 'gcr.io/cloud-builders/gcloud'
+  id: Reserve IP
+  entrypoint: 'bash'
+  args:
+    - '-c'
+    - |
+      gcloud compute addresses create mlops --region us-central1 || echo 'Already available'
+
+# This step generates the new manifest
+- name: 'gcr.io/cloud-builders/gcloud'
+  id: Generate manifest
+  entrypoint: /bin/sh
+  args:
+  - '-c'
+  - |
+     sed "s/GOOGLE_CLOUD_PROJECT/${PROJECT_ID}/g" kubernetes.yaml.tpl | \
+     sed "s/APP_NAME/mlops/g" | \
+     sed "s/APP_IP_ADDRESS/$(gcloud compute addresses describe mlops --region us-central1 | grep 'address:'|sed 's|^address: ||')/g" | \
+     sed "s/COMMIT_SHA/${SHORT_SHA}/g" > kubernetes.yaml
+
+- name: 'gcr.io/cloud-builders/gcloud'
+  id: Print Kubernetes config
+  entrypoint: /bin/sh
+  args:
+  - '-c'
+  - |
+     cat kubernetes.yaml
+
+# This step builds the container image.
+- name: 'gcr.io/cloud-builders/docker'
+  id: Build
+  args:
+  - 'build'
+  - '-t'
+  - 'gcr.io/$PROJECT_ID/mlops:$SHORT_SHA'
+  - '.'
+
+# This step pushes the image to Container Registry
+# The PROJECT_ID and SHORT_SHA variables are automatically
+# replaced by Cloud Build.
+- name: 'gcr.io/cloud-builders/docker'
+  id: Push
+  args:
+  - 'push'
+  - 'gcr.io/$PROJECT_ID/mlops:$SHORT_SHA'
+
+# This step deploys the new version of our container image
+# in the hello-cloudbuild Kubernetes Engine cluster.
+- name: 'gcr.io/cloud-builders/kubectl'
+  id: Deploy
+  args:
+  - 'apply'
+  - '-f'
+  - 'kubernetes.yaml'
+  env:
+  - 'CLOUDSDK_COMPUTE_ZONE=us-central1-a'
+  - 'CLOUDSDK_CONTAINER_CLUSTER=main'
