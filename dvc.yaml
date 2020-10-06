@@ -6,9 +6,6 @@ stages:
     - src/preprocess.py
     outs:
     - assets/preprocessed/
-    params:
-    - model.random
-    - model.split
   featurize:
     cmd: python src/featurize.py
     deps:
