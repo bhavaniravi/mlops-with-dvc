@@ -29,6 +29,7 @@ def infer_df(model, df):
     
     result_df = pd.DataFrame()
     result_df["infer"] = model.predict(df)
+    result_df["probability"] = model.predict_proba(df)[0][1]
     return result_df
 
 def infer(model):
@@ -64,8 +65,8 @@ if not os.path.isdir(Config.EVAL_PATH):
     os.mkdir(Config.EVAL_PATH)
 
 if __name__ == '__main__':
-    from sklearn.linear_model import SGDClassifier
-    model = SGDClassifier()
-    # model = MultinomialNB()
+    # from sklearn.linear_model import SGDClassifier
+    # model = SGDClassifier()
+    model = MultinomialNB()
     run(model)
     pickle.dump(model, open(f"{Config.MODELS_PATH}/model.pickle", "wb"))
