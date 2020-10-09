@@ -24,7 +24,7 @@ train_test_eval:
   cmd: python src/model.py
   deps:
   - path: assets/featurized
-    md5: 7f997669ffbe0396613adf1b983c1d57.dir
+    md5: 2b97c3dfb7abb2df2e43d499d8aaef5d.dir
   - path: src/model.py
     md5: 31fb8697413ea4146905adc6defa5788
   params:

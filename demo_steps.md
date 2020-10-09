@@ -63,19 +63,21 @@ dvc push -r local
 dvc repro
 ```
 
+
+
 ## CI/CD Pipeline
 
-### Setup GCS remote folder
+1. Setup GCS remote folder
 
 ```
 dvc remote add gcs gs://mlops-dvc-storage
 dvc push -r gcs
 ```
 
-### Setup DockerFile
+2. Setup DockerFile
 
-### Setup kubernetes yaml
+3. Setup kubernetes yaml
 
-### Setup CI/CD script
+4. Setup CI/CD script
 
 > Commit and push code
