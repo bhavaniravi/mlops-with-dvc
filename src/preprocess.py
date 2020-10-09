@@ -5,8 +5,8 @@ import utils
 def preprocess_df(df):
     df['lengths'] = df['tweet'].apply(len)
     df['tweet'] = df['tweet'].apply(utils.encode)
+    df["tweet"] = df["tweet"].apply(utils.remove_mention)
     df['tweet'] = df['tweet'].apply(utils.remove_puncuation)
-    # df['tweet'] = df['tweet'].apply(utils.remove_stop_words)
     return df
 
 def preprocess(force=False):

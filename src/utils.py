@@ -2,8 +2,15 @@ import string
 import nltk
 from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
+import re
 
 stopwords = stopwords.words('english')
+
+def remove_mention(text):
+    processed = re.sub(r"(?:\@|http?\://|https?\://|www)\S+", "", text)
+    text = " ".join(processed.split())
+    return text
+
 
 def remove_puncuation(text):
     punc_removed = []

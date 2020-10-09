@@ -39,22 +39,4 @@ spec:
     targetPort: 80
     name: APP_NAME
   type: LoadBalancer
-# apiVersion: "autoscaling/v2beta1"
-# kind: "HorizontalPodAutoscaler"
-# metadata:
-#   name: "mlops-hpa-dbv6"
-#   namespace: "mlops"
-#   labels:
-#     app: "mlops"
-# spec:
-#   scaleTargetRef:
-#     kind: "Deployment"
-#     name: "mlops"
-#     apiVersion: "apps/v1"
-#   minReplicas: 1
-#   maxReplicas: 5
-#   metrics:
-#   - type: "Resource"
-#     resource:
-#       name: "cpu"
-#       targetAverageUtilization: 80
+
