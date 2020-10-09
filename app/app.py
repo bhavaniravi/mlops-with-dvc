@@ -17,7 +17,13 @@ def predict():
         return {"status": "Failure", "message": "Nothing to predict"}
     text = request.args.get('tweet')
     prediction = pipeline.predict(text)
-    return {"status": "success", "is_abusive": str(prediction["infer"][0]), "abusive_scale":  str(prediction["probability"][0]) }
+    abusive_scale = prediction["probability"][0]
+    print (abusive_scale)
+    is_abusive = 0
+    if abusive_scale > 0.015:
+        is_abusive = 1
+
+    return {"status": "success", "is_abusive": str(is_abusive)}
     
 
 
