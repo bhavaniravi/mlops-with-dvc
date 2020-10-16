@@ -9,11 +9,24 @@ The project is designed to for a talk at #devfestindia-2020
 3. Versioning models
 4. Deploying using docker and kubernetes
 
-## Slides
+---
 
-WIP
+## Recreate Steps for new project
 
-## Setup and Run project
+[Checkout demo steps here](demo_steps.md)
+
+
+
+---
+
+## Run this project
+
+### Pre-Requisites
+
+1. Python 3.7
+2. Pip
+
+### Setup the project
 
 1. Clone the repo
 
@@ -30,18 +43,30 @@ dvc pull -r gdrive
 
 > It will ask for authorization, please enter the auth key from the URL 
 
-3. Run the application
+3. Install requirements
+
+```
+pip install -r requirements.txt
+```
+
+### Run project
+
+
+1. Run the application
 
 ```
 python app/app.py
 ```
 
-4. Update model/any ML step and run
+2. Update model/any ML step and run
 
 ```
 dvc repro
 dvc push -r gdrive
 ```
+
+
+---
 
 ## DVC Notes
 
