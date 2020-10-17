@@ -7,6 +7,7 @@ class Config:
     FEATURES_PATH = f"{BASE}/featurized"
     MODELS_PATH = f"{BASE}/models"
     EVAL_PATH = f"{BASE}/eval"
+    TRAIN_DATASET = "train.csv"
 
     PREPROCESSED_TRAIN = f"{PREPROCESS_PATH}/train.csv"
     PREPROCESSED_TEST = f"{PREPROCESS_PATH}/test.csv"
