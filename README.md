@@ -2,6 +2,10 @@
 
 The project is designed to for a talk at #devfestindia-2020
 
+## Video 
+
+[DevfestIndia Talk Video](https://youtu.be/chtdrBvJpZ4?t=1101)
+
 ## Topics to be convered
 
 1. Data versioning
