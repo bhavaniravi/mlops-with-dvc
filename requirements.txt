@@ -8,7 +8,7 @@ click==7.1.2
 colorama==0.4.3
 commonmark==0.9.1
 configobj==5.0.6
-cryptography==3.1.1
+cryptography==3.2
 decorator==4.4.2
 dictdiffer==0.8.1
 distro==1.5.0
