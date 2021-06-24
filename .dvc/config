@@ -1,4 +1,5 @@
 [core]
     remote = origin
+    analytics = false
 ['remote "origin"']
     url = /tmp/dvc-storage
